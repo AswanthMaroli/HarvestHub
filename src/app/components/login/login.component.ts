@@ -4,6 +4,7 @@ import { loginData } from '../../Models/loginData';
 import { Users } from '../../Models/users';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
+import { SaveResponse } from '../../Models/SaveResponse';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class LoginComponent {
     this.loginData.Password  = this.loginForm.value.password;
     await this.LoginService.Authenticate(this.loginData).subscribe((data)=>{
       console.log(data);
-      let resp = new Response();
+      let resp = new SaveResponse();
       resp=data;
       if( resp.Saved==true){
         alert("Login Success!");
