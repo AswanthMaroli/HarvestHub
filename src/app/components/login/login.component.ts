@@ -21,6 +21,7 @@ export class LoginComponent {
   loginData = new loginData();
   users: Users[] = [];
   loginForm: FormGroup;
+  isValid: boolean=true;
 
   constructor(private formBuilder: FormBuilder, private router: Router,
      private LoginService: LoginService
@@ -36,11 +37,16 @@ export class LoginComponent {
   if (this.loginForm.valid) {
     this.loginData.Email = this.loginForm.value.email;
     this.loginData.Password  = this.loginForm.value.password;
+    if(this.IsValid()==false){
+        return;
+    }
     await this.LoginService.Authenticate(this.loginData).subscribe((data)=>{
       console.log(data);
       let resp = new SaveResponse();
       resp=data;
       if( resp.Saved==true){
+        console.log('UserID',resp.ID);
+        localStorage.setItem('UserID', JSON.stringify(resp.ID));
         alert("Login Success!");
         this.router.navigate(['']);
       }else{
@@ -48,6 +54,27 @@ export class LoginComponent {
       }
   })
 }
+}
+
+IsValid(){
+  this.isValid=true;
+
+  this.loginData.Email     =  this.loginData.Email==null ||
+                              this.loginData.Email==undefined||  
+                              this.loginData.Email==''
+                              ?'': this.loginData.Email;
+
+  this.loginData.Password  =  this.loginData.Password==null ||
+                              this.loginData.Password==undefined||  
+                              this.loginData.Password==''
+                              ?'': this.loginData.Password;
+
+  if(this.loginData.Password=='' || this.loginData.Email==''){
+    return this.isValid=false;
+  }
+  else{
+    return true;
+  }
 }
 
 }

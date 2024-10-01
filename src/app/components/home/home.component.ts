@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { map, Observable } from 'rxjs';
 import { ProductDetail } from '../../Models/ProductDetail';
 import { ProductService } from './services/product.service';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule,RouterModule,HeaderComponent,FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

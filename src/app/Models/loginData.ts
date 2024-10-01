@@ -1,4 +1,4 @@
 export class loginData{
-    Email     : number  =  0 ;
+    Email     : string  =  '' ;
     Password  : string  =  '';
 }
