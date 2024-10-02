@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Registration } from '../details/Models/Registration';
 import { ProductService } from '../home/services/product.service';
 import { ProductRegistrationService } from '../details/services/product-registration.service';
+import { Cart } from '../details/Models/cart';
 
 @Component({
   selector: 'app-cart',
@@ -20,7 +21,8 @@ export class CartComponent {
   ProductRegID: any;
   state$: any;
   Registration : Registration = new Registration();
-  CartData :Registration[]=[];
+  CartData :Cart[]=[];
+  UserID: any;
 
   constructor(private ProductService : ProductService,
     private router : Router,
@@ -33,6 +35,7 @@ export class CartComponent {
 
   async ngOnInit(){
     this.ProductRegID= JSON.parse(this.getProductRegID(), this.ProductRegID);
+    this.UserID= JSON.parse(this.getUserID(), this.UserID);
    
   this.getCart();
   
@@ -40,7 +43,7 @@ export class CartComponent {
 
 
   getCart(){
-    this.ProductRegistrationService.GetProductByRegID(this.ProductRegID).subscribe((data)=>{
+    this.ProductRegistrationService.GetCart(this.UserID).subscribe((data)=>{
       console.log('pdata',data);
       this.CartData=data;
      if( !this.CartData ){
@@ -53,6 +56,16 @@ export class CartComponent {
     let ProductRegID = localStorage.getItem('ProductRegID');
     if(ProductRegID){
       return ProductRegID;
+    }else{
+      return '';
+    }
+     
+  }
+
+  getUserID(): string {
+    let UserID = localStorage.getItem('UserID');
+    if(UserID){
+      return UserID;
     }else{
       return '';
     }

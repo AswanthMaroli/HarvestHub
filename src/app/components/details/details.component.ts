@@ -25,6 +25,7 @@ export class DetailsComponent {
   state$: Observable<any> | undefined;
   Registration : Registration = new Registration();
   ProductRegID: number=0;
+  UserID: any;
 
   constructor(private ProductService : ProductService,
     private router : Router,
@@ -43,8 +44,18 @@ export class DetailsComponent {
         //console.log('ProductID', this.ProductID); // ProductID }); 
       });
 
-
+      this.UserID= JSON.parse(this.getUserID(), this.UserID);
   await this.GetProductDetails();
+  }
+
+  getUserID(): string {
+    let UserID = localStorage.getItem('UserID');
+    if(UserID){
+      return UserID;
+    }else{
+      return '';
+    }
+     
   }
 
 
@@ -68,6 +79,7 @@ async AddToCart(){
 
 debugger;
   this.Registration.ProductID=this.ProductID;
+  this.Registration.ModifiedUser=this.UserID;
   this.Registration.Calculate(this.ProductDetails);
   console.log('test reg',this.Registration);
 

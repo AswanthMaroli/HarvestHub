@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SaveResponse } from '../../../Models/SaveResponse';
 import { Registration } from '../Models/Registration';
+import { Cart } from '../Models/cart';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,16 @@ export class ProductRegistrationService {
         'Content-Type': 'application/json'
       }) ,
       params: new HttpParams().set('ProductRegID', ID.toString())
+    });
+  }
+
+  GetCart( ID:number): Observable<Cart[]> {
+    const url = `${this.apiUrl}/getcart`;
+    return this.http.get<Cart[]>(url , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) ,
+      params: new HttpParams().set('UserID', ID.toString())
     });
   }
 }
