@@ -5,6 +5,9 @@ import { NgModule } from '@angular/core';
 import { RegisterComponent } from './components/register/register.component';
 import { DetailsComponent } from './components/details/details.component';
 import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { OrderdetailsComponent } from './components/orderdetails/orderdetails.component';
 
 export const routes: Routes = [
 
@@ -23,6 +26,19 @@ export const routes: Routes = [
       {
         path:'cart',component:CartComponent
       },
+
+      {
+        path:'checkout',component:CheckoutComponent
+      },
+      {
+        path:'payment',component:PaymentComponent
+      },
+
+      {
+        path:'order',component:OrderdetailsComponent
+      },
+      
+
 ];
 
 @NgModule({

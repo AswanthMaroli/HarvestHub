@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { SaveResponse } from '../../../Models/SaveResponse';
 import { Registration } from '../Models/Registration';
 import { Cart } from '../Models/cart';
+import { Customer } from '../../checkout/model/Customer';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,15 @@ export class ProductRegistrationService {
   // Method to post data to the API
   SaveRegistration( data: Registration): Observable<SaveResponse> {
     const url = `${this.apiUrl}/saveRegistration`;
+    return this.http.post<SaveResponse>(url, data, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) 
+    });
+  }
+
+  SaveCustomer( data: Customer): Observable<SaveResponse> {
+    const url = `${this.apiUrl}/saveCustomer`;
     return this.http.post<SaveResponse>(url, data, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
