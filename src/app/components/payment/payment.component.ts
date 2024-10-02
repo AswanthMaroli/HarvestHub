@@ -6,6 +6,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductService } from '../home/services/product.service';
 import { ProductRegistrationService } from '../details/services/product-registration.service';
 import { Cart } from '../details/Models/cart';
+import { SaveResponse } from '../../Models/SaveResponse';
+import { PaymentData } from './Models/payment';
 
 @Component({
   selector: 'app-payment',
@@ -18,6 +20,8 @@ export class PaymentComponent {
   UserID: any;
   CartData: Cart[]=[];
   SubTotal: number=0;
+  PaymentData :PaymentData = new PaymentData();
+  ProductRegID: any;
 
   constructor(private ProductService : ProductService,
     private router : Router,
@@ -26,6 +30,7 @@ export class PaymentComponent {
 
   ngOnInit() {
     this.UserID= JSON.parse(this.getUserID(), this.UserID);
+    this.ProductRegID= JSON.parse(this.getProductRegID(), this.ProductRegID);
     this.getCart();
   }
 
@@ -33,6 +38,16 @@ export class PaymentComponent {
     let UserID = localStorage.getItem('UserID');
     if(UserID){
       return UserID;
+    }else{
+      return '';
+    }
+     
+  }
+
+  getProductRegID(): string {
+    let ProductRegID = localStorage.getItem('ProductRegID');
+    if(ProductRegID){
+      return ProductRegID;
     }else{
       return '';
     }
@@ -52,6 +67,28 @@ export class PaymentComponent {
       })
      }
     })
+  }
+
+
+  async Payment(){
+    this.PaymentData.ProductRegID=this.ProductRegID;
+    this.PaymentData.PaymentType='CARD';
+    this.PaymentData.NetTotal=this.SubTotal+40;
+    this.PaymentData.ModifiedUser=this.UserID;
+
+    console.log(this.PaymentData);
+    
+
+    await this.ProductRegistrationService.SaveOrder(this.PaymentData).subscribe((data)=>{
+      console.log(data);
+      let resp = new SaveResponse();
+      resp=data;
+     if( resp.Saved==true){
+      alert("Registered!");
+      this.router.navigate(['order']);
+     }
+    })
+    
   }
 
 }

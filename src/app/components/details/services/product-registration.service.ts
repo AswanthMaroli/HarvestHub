@@ -5,6 +5,7 @@ import { SaveResponse } from '../../../Models/SaveResponse';
 import { Registration } from '../Models/Registration';
 import { Cart } from '../Models/cart';
 import { Customer } from '../../checkout/model/Customer';
+import { PaymentData } from '../../payment/Models/payment';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,15 @@ export class ProductRegistrationService {
 
   SaveCustomer( data: Customer): Observable<SaveResponse> {
     const url = `${this.apiUrl}/saveCustomer`;
+    return this.http.post<SaveResponse>(url, data, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) 
+    });
+  }
+
+  SaveOrder( data: PaymentData): Observable<SaveResponse> {
+    const url = `${this.apiUrl}/saveOrder`;
     return this.http.post<SaveResponse>(url, data, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
