@@ -8,6 +8,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { OrderdetailsComponent } from './components/orderdetails/orderdetails.component';
+import { ViewordersComponent } from './components/vieworders/vieworders.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
 
@@ -36,6 +38,14 @@ export const routes: Routes = [
 
       {
         path:'order',component:OrderdetailsComponent
+      },
+
+      {
+        path:'vieworders',component:ViewordersComponent
+      },
+
+      {
+        path:'profile',component:ProfileComponent
       },
       
 

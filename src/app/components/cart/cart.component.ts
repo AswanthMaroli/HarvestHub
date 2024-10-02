@@ -8,6 +8,7 @@ import { Registration } from '../details/Models/Registration';
 import { ProductService } from '../home/services/product.service';
 import { ProductRegistrationService } from '../details/services/product-registration.service';
 import { Cart } from '../details/Models/cart';
+import { SaveResponse } from '../../Models/SaveResponse';
 
 @Component({
   selector: 'app-cart',
@@ -23,6 +24,9 @@ export class CartComponent {
   Registration : Registration = new Registration();
   CartData :Cart[]=[];
   UserID: any;
+  SubTotal: number=0;
+  DeliveryFee : number=40;
+  ProductRegDetails: Registration[]=[];
 
   constructor(private ProductService : ProductService,
     private router : Router,
@@ -38,7 +42,7 @@ export class CartComponent {
     this.UserID= JSON.parse(this.getUserID(), this.UserID);
    
   this.getCart();
-  
+
   }
 
 
@@ -49,8 +53,15 @@ export class CartComponent {
      if( !this.CartData ){
       this.CartData=[];
      }
+     else{
+      this.CartData.forEach((data)=>{
+         this.SubTotal +=data.NetTotal;
+      })
+     }
     })
   }
+
+  
 
   getProductRegID(): string {
     let ProductRegID = localStorage.getItem('ProductRegID');
@@ -71,30 +82,48 @@ export class CartComponent {
     }
      
   }
+  Quantitychange(data:Cart){
+    data.NetTotal=data.Price*data.Quantity;
+    this.SubTotal=0;
+    this.CartData.forEach((data)=>{
+      this.SubTotal +=data.NetTotal;
+   })
+  }
 
-  // async AddToCart(){
+  async Checkout(){
 
-  //   debugger;
-  //     this.Registration.ProductID=this.ProductID;
-  //     this.Registration.Calculate(this.ProductDetails);
-  //     console.log('test reg',this.Registration);
+    debugger;
+    this.CartData.forEach((data)=>{
+
+      this.Registration.ProductID=data.ProductID;
+      this.Registration.NetTotal =data.NetTotal;
+      this.Registration.Quantity=0;
+      this.Registration.Quantity=data.Quantity;
+      this.Registration.NetTotal=data.Price*data.Quantity;
+      this.Registration.ModifiedUser=this.UserID;
+      this.Registration.ProductRegID=data.ProductRegID;
+     
+      console.log('test reg',this.Registration);
     
-  //     this.ProductRegistrationService.SaveRegistration(this.Registration)
-  //       .subscribe((data) => {
-  //         console.log(data);
-  //         let resp = new SaveResponse();
-  //         resp = data;
-  //         debugger;
-  //         if (resp.Saved == true) {
-  //           alert("Added To cart!");
-  //           console.log('added');
-  //           this.ProductRegID = resp.ID;
-  //           localStorage.setItem('ProductRegID', JSON.stringify(this.ProductRegID));
+       this.ProductRegistrationService.SaveRegistration(this.Registration)
+        .subscribe((data) => {
+          console.log(data);
+          let resp = new SaveResponse();
+          resp = data;
+          debugger;
+          if (resp.Saved == true) {
+           // alert("Added To cart!");
+            console.log('added');
     
-  //           this.router.navigate(['cart']);
-  //         }
-  //       })
+           
+          }
+        })
+      
+
+    })
+
+    this.router.navigate(['checkout']);
       
     
-  //   }
+    }
 }

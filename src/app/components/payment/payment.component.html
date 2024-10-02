@@ -8,17 +8,12 @@
                     <h6 class="text-uppercase"><small>ORDER</small></h6>
                     <h4 class="boldFont">INFO</h4>
     
-                    <div class="my-4 d-flex justify-content-between align-items-center">
-                        <div>cardamom <br><span class="text-secondary"><small>(100gm) x 2</small></span></div>
+                    <div *ngFor="let data of CartData" class="my-4 d-flex justify-content-between align-items-center">
+                        <div>{{data.ProductName}} <br><span class="text-secondary"><small>{{data.Quantity}} x {{data.Price}}</small></span></div>
                         <div class="w-100 mx-3 borderDotted"></div>
-                        <div>$10.00</div>
+                        <div>${{data.NetTotal}}</div>
                     </div>
-                    <div class="my-4 d-flex justify-content-between align-items-center">
-                        <div style="min-width:130px">Walnuts<br><span class="text-secondary"><small>(100gm) x
-                                    1</small></span></div>
-                        <div class="w-100 mx-3 borderDotted"></div>
-                        <div>$10.00</div>
-                    </div>
+                    
                     <div class="my-4">
                         <h6 class="text-success">ADD CARD DETAILS</h6>
                         <div class="my-3">
@@ -35,7 +30,7 @@
                     <div class="my-4 fs-4">
                         <div class="d-flex justify-content-between">
                             <div class="">Total</div>
-                            <div class="">$20.00</div>
+                            <div class="">${{this.SubTotal+40}}</div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between align-items-center ">
