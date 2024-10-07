@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductRegistrationService } from '../details/services/product-registration.service';
 import { Customer } from '../checkout/model/Customer';
+import { Order } from './model/order';
 
 @Component({
   selector: 'app-orderdetails',
@@ -13,6 +14,7 @@ import { Customer } from '../checkout/model/Customer';
 export class OrderdetailsComponent {
   Customer: Customer=new Customer();
   UserID: any;
+  OrderData:Order=new Order();
 
   constructor(private router : Router,
     private route :ActivatedRoute,
@@ -24,8 +26,13 @@ export class OrderdetailsComponent {
     
     this.UserID= JSON.parse(this.getUserID(), this.UserID);
     this.getContact();
-    //localStorage.clear();
+    this.getOrder();
+    
   }
+
+  // ngOnDestroy(){
+      
+  // }
 
   getUserID(): string {
     let UserID = localStorage.getItem('UserID');
@@ -45,6 +52,19 @@ export class OrderdetailsComponent {
       }
      if( !this.Customer ){
       this.Customer=new Customer();
+     }
+    })
+  }
+
+  getOrder(){
+    this.ProductRegistrationService.GetOrder(this.UserID).subscribe((data)=>{
+      console.log('pdata',data);
+      this.OrderData=data;
+      if(data instanceof Array){
+       this.OrderData=data[0];
+      }
+     if( !this.OrderData ){
+      this.OrderData=new Order();
      }
     })
   }

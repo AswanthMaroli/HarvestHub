@@ -11,20 +11,20 @@
             <div class="order-summary">
                 <h3>Order Summary</h3>
                 <div class="product">
-                    <img src="path/to/your/image.jpg" alt="Organic Tomatoes" class="product-image">
+                    <img src="{{this.OrderData.ImageURL}}" style=" height: 100px ;width: 100px;" class="product-image">
                     <div class="product-details">
-                        <p><strong>Product:</strong> Organic Tomatoes</p>
-                        <p><strong>Quantity:</strong> 2 kg</p>
-                        <p><strong>Total:</strong> $8.00</p>
+                        <p><strong>Product:</strong> {{this.OrderData.ProductName}}</p>
+                        <p><strong>Quantity:</strong>{{this.OrderData.Quantity}}</p>
+                        <p><strong>Total:</strong>${{this.OrderData.NetTotal}}</p>
                     </div>
                 </div>
             </div>
 
             <div class="customer-info">
                 <h3>Your Information</h3>
-                <p><strong>Name:</strong> John Doe</p>
-                <p><strong>Email:</strong> johndoeexample.com</p>
-                <p><strong>Address:</strong> 123 Farm Lane, Agri City</p>
+                <p><strong>Name:</strong> {{this.Customer.ContactName}}</p>
+                <p><strong>Email:</strong> {{this.Customer.Email}}</p>
+                <p><strong>Address:</strong>{{ this.Customer.StreetAddress}}</p>
             </div>
 
             <div class="footer">

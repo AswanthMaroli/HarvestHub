@@ -23,6 +23,7 @@ export class HomeComponent {
               ){}
 
   async ngOnInit(){  
+    
     await this.GetProducts();
   }
 

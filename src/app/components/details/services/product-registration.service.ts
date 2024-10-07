@@ -6,6 +6,7 @@ import { Registration } from '../Models/Registration';
 import { Cart } from '../Models/cart';
 import { Customer } from '../../checkout/model/Customer';
 import { PaymentData } from '../../payment/Models/payment';
+import { Order } from '../../orderdetails/model/order';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +73,17 @@ export class ProductRegistrationService {
         'Content-Type': 'application/json'
       }) ,
       params: new HttpParams().set('UserID', ID.toString())
+    });
+  }
+
+  GetOrder( ID:number): Observable<Order> {
+    ID=7;
+    const url = `${this.apiUrl}/getorderinfo`;
+     return  this.http.get<Order>(url , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) ,
+      params: new HttpParams().set('OrderID', ID.toString())
     });
   }
 }
