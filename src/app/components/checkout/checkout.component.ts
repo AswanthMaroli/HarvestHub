@@ -19,14 +19,17 @@ export class CheckoutComponent {
 
   CustomerData : Customer= new Customer();
   UserID: any;
+  Customer: Customer= new Customer();
 
   constructor(private router : Router,
     private route :ActivatedRoute,
   private ProductRegistrationService : ProductRegistrationService){
 
   }
-  ngOnInit(){
+  async ngOnInit(){
     this.UserID= JSON.parse(this.getUserID(), this.UserID);
+    await this.getContact();
+   
   }
 
   getUserID(): string {
@@ -62,6 +65,22 @@ export class CheckoutComponent {
         })
       
     
+    }
+
+    async getContact(){
+      await this.ProductRegistrationService.GetCustomer(this.UserID).subscribe((data)=>{
+        console.log('pdata',data);
+        this.Customer=data;
+        if(data instanceof Array){
+          this.Customer=data[0];
+        }
+       if( !this.Customer ){
+        this.Customer=new Customer();;
+       }
+       if( this.Customer){
+        this.CustomerData= this.Customer;
+       }
+      })
     }
 
 }

@@ -64,4 +64,14 @@ export class ProductRegistrationService {
       params: new HttpParams().set('UserID', ID.toString())
     });
   }
+
+   GetCustomer( ID:number): Observable<Customer> {
+    const url = `${this.apiUrl}/getcustomerinfo`;
+     return  this.http.get<Customer>(url , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) ,
+      params: new HttpParams().set('UserID', ID.toString())
+    });
+  }
 }
