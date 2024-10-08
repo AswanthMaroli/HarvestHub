@@ -10,6 +10,11 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { OrderdetailsComponent } from './components/orderdetails/orderdetails.component';
 import { ViewordersComponent } from './components/vieworders/vieworders.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AddproductsComponent } from './components/farmer/addproducts/addproducts.component';
+import { FarmerordersComponent } from './components/farmer/farmerorders/farmerorders.component';
+import { AdmminordersComponent } from './components/admin/admminorders/admminorders.component';
+import { AllproductsComponent } from './components/admin/allproducts/allproducts.component';
+import { FarmerInfoComponent } from './components/admin/farmer-info/farmer-info.component';
 
 export const routes: Routes = [
 
@@ -47,6 +52,27 @@ export const routes: Routes = [
       {
         path:'profile',component:ProfileComponent
       },
+      //
+      {
+        path:'addproduct',component:AddproductsComponent
+      },
+
+      {
+        path:'farmerorders',component:FarmerordersComponent
+      },
+      {
+        path:'adminorders',component:AdmminordersComponent
+      },
+
+      {
+        path:'allproducts',component:AllproductsComponent
+      },
+
+      {
+        path:'farmerinfo',component:FarmerInfoComponent
+      },
+
+      
       
 
 ];
