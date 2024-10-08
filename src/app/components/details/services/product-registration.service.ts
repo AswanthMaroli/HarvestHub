@@ -86,4 +86,14 @@ export class ProductRegistrationService {
       params: new HttpParams().set('OrderID', ID.toString())
     });
   }
+
+  GetOrderList( ): Observable<Order[]> {
+    
+    const url = `${this.apiUrl}/getorders`;
+     return  this.http.get<Order[]>(url , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) 
+    });
+  }
 }

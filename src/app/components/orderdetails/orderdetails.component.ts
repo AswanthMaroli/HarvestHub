@@ -56,7 +56,7 @@ export class OrderdetailsComponent {
     })
   }
 
-  getOrder(){
+  getOrder(){ 
     this.ProductRegistrationService.GetOrder(this.UserID).subscribe((data)=>{
       console.log('pdata',data);
       this.OrderData=data;

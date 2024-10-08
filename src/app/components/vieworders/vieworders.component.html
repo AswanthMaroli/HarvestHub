@@ -1,41 +1,25 @@
 <div class="container">
     <main class="main-content">
         <h2>Your Orders</h2>
-        <div class="orders-list">
+        <div class="orders-list" *ngFor="let data of this.OrderData">
             <div class="order">
                 <div class="order-header">
-                    <h3>Order ID: #001</h3>
+                    <h3>Order ID: {{data.OrderIDPK}}</h3>
                     <p>Status: <span class="status shipped">Shipped</span></p>
                 </div>
                 <div class="order-details">
                     <div class="product-info">
-                        <img src="images/tomatoes.jpg" alt="Organic Tomatoes" class="product-image">
+                        <img src="{{data.ImageURL}}" alt="Organic Tomatoes" class="product-image">
                         <div class="product-description">
-                            <p><strong>Product:</strong> Organic Tomatoes</p>
-                            <p><strong>Quantity:</strong> 2 kg</p>
-                            <p><strong>Total:</strong> $8.00</p>
-                            <p><strong>Date:</strong> 2024-10-01</p>
+                            <p><strong>Product:</strong> {{data.ProductName}}</p>
+                            <p><strong>Quantity:</strong> {{data.Quantity}}</p>
+                            <p><strong>Total:</strong>{{data.NetTotal}}</p>
+                            <p><strong>Date:</strong>{{data.OrderDate}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="order">
-                <div class="order-header">
-                    <h3>Order ID: #002</h3>
-                    <p>Status: <span class="status processing">Processing</span></p>
-                </div>
-                <div class="order-details">
-                    <div class="product-info">
-                        <img src="images/cucumbers.jpg" alt="Fresh Cucumbers" class="product-image">
-                        <div class="product-description">
-                            <p><strong>Product:</strong> Fresh Cucumbers</p>
-                            <p><strong>Quantity:</strong> 1 kg</p>
-                            <p><strong>Total:</strong> $3.00</p>
-                            <p><strong>Date:</strong> 2024-09-30</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
             <!-- More orders can be added here -->
         </div>
 
