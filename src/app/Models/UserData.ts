@@ -3,7 +3,7 @@ export class UserData{
     UserName  : string  =  '';
     Phone     : string  =  '';
     Address   : string  =  '';
-    Email     : number  =  0 ;
+    Email     : string  =  '';
     Role      : number  =  0 ;
     IsActive  : boolean =  false;
 }

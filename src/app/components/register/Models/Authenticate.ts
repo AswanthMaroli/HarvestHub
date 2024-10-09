@@ -1,7 +1,7 @@
 export class Authenticate{
     UserID    : number  =  0 ;
     UserName  : string  =  '';
-    Email     : number  =  0 ;
+    Email     : string  =  '';
     Password  : string  =  '';
     ConfirmPassword  : string  =  '';
     Role      : number  =  0 ;

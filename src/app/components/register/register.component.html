@@ -79,6 +79,15 @@
                                     <input [(ngModel)]="UserData.Email" name="Email" type="email" id="form3Example3" class="form-control" placeholder="Email address"/>
                                 </div>
 
+                                <div class="form-outline mb-4">
+                                    <select [(ngModel)]="UserData.Role" name="role" id="form3Example4" class="form-control" required>
+   
+                                        <option selected value="0">User</option>
+                                    <option value="1">Farmer</option>
+                                      </select>
+                                    <!-- <label class="form-label" for="form3Example4">Role</label> -->
+                                  </div>
+
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
                                     <input [(ngModel)]="UserData.Password" name="Password" type="password" id="form3Example4" class="form-control" placeholder="Password"/>

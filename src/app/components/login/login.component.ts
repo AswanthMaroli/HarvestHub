@@ -10,7 +10,7 @@ import { SaveResponse } from '../../Models/SaveResponse';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -21,60 +21,76 @@ export class LoginComponent {
   loginData = new loginData();
   users: Users[] = [];
   loginForm: FormGroup;
-  isValid: boolean=true;
+  isValid: boolean = true;
 
   constructor(private formBuilder: FormBuilder, private router: Router,
-     private LoginService: LoginService
-    ) {
+    private LoginService: LoginService
+  ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      role: ['', Validators.required],
     });
   }
 
-  async login(){
-
-  if (this.loginForm.valid) {
-    this.loginData.Email = this.loginForm.value.email;
-    this.loginData.Password  = this.loginForm.value.password;
-    if(this.IsValid()==false){
+  async login() {
+debugger;
+    if (this.loginForm.valid) {
+      this.loginData.Email = this.loginForm.value.email;
+      this.loginData.Password = this.loginForm.value.password;
+      this.loginData.Role = this.loginForm.value.role;
+      console.log(this.loginData.Role );
+      
+      if (this.IsValid() == false) {
         return;
-    }
-    await this.LoginService.Authenticate(this.loginData).subscribe((data)=>{
-      console.log(data);
-      let resp = new SaveResponse();
-      resp=data;
-      if( resp.Saved==true){
-        console.log('UserID',resp.ID);
-        localStorage.setItem('UserID', JSON.stringify(resp.ID));
-        alert("Login Success!");
-        this.router.navigate(['']);
-      }else{
-        alert("Login Failed!");
       }
-  })
-}
-}
+      await this.LoginService.Authenticate(this.loginData).subscribe((data) => {
+        console.log(data);
+        let resp = new SaveResponse();
+        resp = data;
+        if (resp.Saved == true) {
+          console.log('UserID', resp.ID);
+          localStorage.setItem('UserID', JSON.stringify(resp.ID));
+          alert("Login Success!");
+          if (this.loginData.Role == 0) {
+           
+            this.router.navigate(['']);
+          } else {
+           
+            this.router.navigate(['addproduct']);
+          }
 
-IsValid(){
-  this.isValid=true;
-
-  this.loginData.Email     =  this.loginData.Email==null ||
-                              this.loginData.Email==undefined||  
-                              this.loginData.Email==''
-                              ?'': this.loginData.Email;
-
-  this.loginData.Password  =  this.loginData.Password==null ||
-                              this.loginData.Password==undefined||  
-                              this.loginData.Password==''
-                              ?'': this.loginData.Password;
-
-  if(this.loginData.Password=='' || this.loginData.Email==''){
-    return this.isValid=false;
+        } else {
+          alert("Login Failed!");
+        }
+      })
+    }
   }
-  else{
-    return true;
+
+  IsValid() {
+    this.isValid = true;
+
+    this.loginData.Email = this.loginData.Email == null ||
+      this.loginData.Email == undefined ||
+      this.loginData.Email == ''
+      ? '' : this.loginData.Email;
+
+    this.loginData.Password = this.loginData.Password == null ||
+      this.loginData.Password == undefined ||
+      this.loginData.Password == ''
+      ? '' : this.loginData.Password;
+
+      this.loginData.Role  =  this.loginData.Role==null ||
+                              this.loginData.Role==undefined||  
+                              this.loginData.Role==0
+                              ?0: this.loginData.Role;
+
+    if (this.loginData.Password == '' || this.loginData.Email == '') {
+      return this.isValid = false;
+    }
+    else {
+      return true;
+    }
   }
-}
 
 }
