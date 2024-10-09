@@ -1,1 +1,24 @@
-<p>allproducts works!</p>
+<div class="container">
+    <section class="product-list">
+        <h2>Product List</h2>
+        <input type="text" id="search-bar" placeholder="Search products...">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody *ngFor=" let order of this.ProductDetails">
+                <td>{{order.ProductName}}</td>
+                <td>{{order.TotalQuantity}}</td>
+                <td>{{order.Price}}</td>
+                <td>{{order.ImageURL}}</td>
+                <td>Actions</td>
+            </tbody>
+        </table>
+    </section>
+</div>
