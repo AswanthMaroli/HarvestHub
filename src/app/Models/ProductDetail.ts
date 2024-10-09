@@ -6,7 +6,7 @@ export class ProductDetail{
      Price       : number =0;
      TotalQuantity : number =0;
      ImageURL    : string='' ;
-     ModifiedDate:  Date = new Date() ;
+    // ModifiedDate:  Date = new Date() ;
      ModifiedUser: number =0;
      DelStatus   : boolean=false;
 
@@ -19,7 +19,7 @@ export class ProductDetail{
         this.Price          =0  ;
         this.TotalQuantity  =0  ;
         this.ImageURL       ='' ;
-        this.ModifiedDate   =new Date() ;
+       // this.ModifiedDate   =new Date() ;
         this.ModifiedUser   =0;
         this.DelStatus      =false;
      }

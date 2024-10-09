@@ -27,7 +27,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="email" [(ngModel)]="this.Product.TotalQuantity" class="form-control" placeholder="TotalQuantity">
+                                <input type="number" [(ngModel)]="this.Product.TotalQuantity" class="form-control" placeholder="TotalQuantity">
                             </div>
                             <div class="col">
                                 <input type="text" [(ngModel)]="this.Product.ImageURL" class="form-control" placeholder="ImageURL">
@@ -117,4 +117,30 @@
         <button [routerLink]="['/payment']"  style="height: 40px;" class="btn btn-success rounded shadow mt-2  d-flex justify-content-end" >Save & Continue +</button>
     </div>
 </div> -->
+
+
+<div class="container">
+    <section class="product-list">
+        <h2>Product List</h2>
+        <input type="text" id="search-bar" placeholder="Search products...">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody *ngFor=" let product of this.ProductDetails">
+                <td>{{product.ProductName}}</td>
+                <td>{{product.ProductType}}</td>
+                <td>{{product.Price}}</td>
+                <td>{{product.TotalQuantity}}</td>
+                <td>Actions</td>
+            </tbody>
+        </table>
+    </section>
+</div>
 <app-footer></app-footer>

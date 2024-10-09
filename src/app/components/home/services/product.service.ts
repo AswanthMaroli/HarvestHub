@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ProductDetail } from '../../../Models/ProductDetail';
 import { Observable } from 'rxjs';
 import { UserData } from '../../../Models/UserData';
+import { SaveResponse } from '../../../Models/SaveResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,16 @@ export class ProductService {
     });
   }
 
+  GetProductsByUserID( ID:number): Observable<ProductDetail[]> {
+    const url = `${this.apiUrl}/getproductsbyuserid`;
+    return this.http.get<ProductDetail[]>(url , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) ,
+      params: new HttpParams().set('UserID', ID.toString())
+    });
+  }
+
   GetProductByID( ID:number): Observable<ProductDetail> {
     const url = `${this.apiUrl}/getproduct`;
     return this.http.get<ProductDetail>(url , {
@@ -38,6 +49,16 @@ export class ProductService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }) 
+    });
+  }
+
+
+  SaveProduct( data: ProductDetail): Observable<SaveResponse> {
+    const url = `${this.apiUrl}/saveProduct`;
+    return this.http.post<SaveResponse>(url, data, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
     });
   }
 
