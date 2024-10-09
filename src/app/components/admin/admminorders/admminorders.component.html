@@ -1,1 +1,24 @@
-<p>admminorders works!</p>
+<div class="container">
+    <section class="product-list">
+        <h2>Product List</h2>
+        <input type="text" id="search-bar" placeholder="Search products...">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody *ngFor=" let order of this.OrderData">
+                <td>{{order.ProductName}}</td>
+                <td>{{order.Quantity}}</td>
+                <td>{{order.NetTotal}}</td>
+                <td>{{order.OrderDate}}</td>
+                <td>Actions</td>
+            </tbody>
+        </table>
+    </section>
+</div>

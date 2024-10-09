@@ -77,7 +77,7 @@ export class ProductRegistrationService {
   }
 
   GetOrder( ID:number): Observable<Order> {
-    ID=7;
+    
     const url = `${this.apiUrl}/getorderinfo`;
      return  this.http.get<Order>(url , {
       headers: new HttpHeaders({
@@ -96,4 +96,26 @@ export class ProductRegistrationService {
       }) 
     });
   }
+
+  GetOrderListByUserID(UserID:number): Observable<Order[]> {
+    const url = `${this.apiUrl}/getordersbyuserid`;
+     return  this.http.get<Order[]>(url , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) ,
+      params: new HttpParams().set('UserID', UserID.toString())
+    });
+  }
+
+
+  GetOrderListByFarmerID(UserID:number): Observable<Order[]> {
+    const url = `${this.apiUrl}/getordersbyfarmerid`;
+     return  this.http.get<Order[]>(url , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) ,
+      params: new HttpParams().set('UserID', UserID.toString())
+    });
+  }
+ 
 }
