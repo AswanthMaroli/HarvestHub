@@ -19,6 +19,7 @@ export class FarmerordersComponent {
 
   ngOnInit(){
     this.UserID= JSON.parse(this.getUserID(), this.UserID);
+    this.getOrders();
   }
  
 

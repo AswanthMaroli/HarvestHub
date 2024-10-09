@@ -29,7 +29,7 @@ export class LoginComponent {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      role: ['', Validators.required],
+      role: ['0', Validators.required],
     });
   }
 
