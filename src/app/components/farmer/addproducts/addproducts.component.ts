@@ -77,4 +77,15 @@ async saveProduct(){
      
    
     }
+
+    onFileSelected(event: any) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.Product.ImageURL = e.target.result;  // This will store the base64 URL of the image
+        };
+        reader.readAsDataURL(file); // Convert image to base64 string
+      }
+    }
 }

@@ -13,24 +13,35 @@
 
                         <div class="text-secondary mt-4 mb-2">Product Name</div>
                         <div class="row mb-3">
-                            <div class="col-lg-8 col-md-6 col-xs-12">
+                            <div class="col-12">
                                 <input [(ngModel)]="this.Product.ProductName" type="text" class="form-control" placeholder="Product Name">
                             </div>
-                            <div class="col-lg-4 col-md-6 col-xs-12">
+                            <div class="text-secondary mt-4 mb-2">Description</div>
+                            <div class="col-12">
                                 <input [(ngModel)]="this.Product.Description"  type="text" class="form-control" placeholder="Description">
                             </div>
                         </div>
 
                         <!-- <div class="text-secondary mt-4 mb-2">Contact Info </div> -->
                         <div class="mb-3">
+                            <div class="text-secondary mt-4 mb-2">Price</div>
                             <input type="text" [(ngModel)]="this.Product.Price" placeholder="Price" class="form-control">
                         </div>
                         <div class="row mb-3">
+                            <div class="text-secondary mt-4 mb-2">Total Quantity</div>
                             <div class="col">
                                 <input type="number" [(ngModel)]="this.Product.TotalQuantity" class="form-control" placeholder="TotalQuantity">
                             </div>
+                            <div class="text-secondary mt-4 mb-2">Upload Image</div>
                             <div class="col">
-                                <input type="text" [(ngModel)]="this.Product.ImageURL" class="form-control" placeholder="ImageURL">
+                                    <input type="file" (change)="onFileSelected($event)" class="form-control" accept="image/*"
+                                      placeholder="Upload Image">
+                                    
+                            </div>
+                            <div class="col">
+                                <div>
+                                    <img style="height: 100px; width: 100px;" src="{{this.Product.ImageURL}}" alt="">
+                                  </div>
                             </div>
                         </div>
 

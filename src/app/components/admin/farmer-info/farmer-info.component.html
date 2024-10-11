@@ -1,1 +1,25 @@
-<p>farmer-info works!</p>
+<div class="container">
+    <section class="product-list">
+        <h2>User List</h2>
+        <input type="text" id="search-bar" placeholder="Search products...">
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody *ngFor=" let user of this.UserData">
+                <td> <img style="height: 100px;border: 1px solid black; width: 100px;" src="{{user.ImageURL}}" alt=""></td>
+
+                <td>{{user.UserName}}</td>
+                <td>{{user.Email}}</td>
+                <td>{{user.Role}}</td>
+                <td>Actions</td>
+            </tbody>
+        </table>
+    </section>
+</div>

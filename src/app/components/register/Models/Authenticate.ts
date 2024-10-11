@@ -6,4 +6,5 @@ export class Authenticate{
     ConfirmPassword  : string  =  '';
     Role      : number  =  0 ;
     IsActive  : boolean =  false;
+    ImageURL  : string  =  '';
 }

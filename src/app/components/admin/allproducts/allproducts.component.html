@@ -5,18 +5,19 @@
         <table>
             <thead>
                 <tr>
+                    <th></th>
                     <th>Product Name</th>
-                    <th>Category</th>
-                    <th>Price</th>
                     <th>Stock</th>
+                    <th>Price</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody *ngFor=" let order of this.ProductDetails">
+                <td> <img style="height: 100px;border: 1px solid black; width: 100px;" src="{{order.ImageURL}}" alt=""></td>
+
                 <td>{{order.ProductName}}</td>
                 <td>{{order.TotalQuantity}}</td>
                 <td>{{order.Price}}</td>
-                <td>{{order.ImageURL}}</td>
                 <td>Actions</td>
             </tbody>
         </table>

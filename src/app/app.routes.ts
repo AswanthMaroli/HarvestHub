@@ -15,6 +15,8 @@ import { FarmerordersComponent } from './components/farmer/farmerorders/farmeror
 import { AdmminordersComponent } from './components/admin/admminorders/admminorders.component';
 import { AllproductsComponent } from './components/admin/allproducts/allproducts.component';
 import { FarmerInfoComponent } from './components/admin/farmer-info/farmer-info.component';
+import { DashboardComponent } from './components/farmer/dashboard/dashboard.component';
+import { AdminComponent } from './components/admin/admin/admin.component';
 
 export const routes: Routes = [
 
@@ -70,6 +72,14 @@ export const routes: Routes = [
 
       {
         path:'farmerinfo',component:FarmerInfoComponent
+      },
+
+      {
+        path:'dashboard',component:DashboardComponent
+      },
+
+      {
+        path:'admin',component:AdminComponent
       },
 
       
