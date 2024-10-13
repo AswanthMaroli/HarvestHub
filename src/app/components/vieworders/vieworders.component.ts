@@ -20,7 +20,7 @@ export class ViewordersComponent {
   ngOnInit(){
     this.UserID= JSON.parse(this.getUserID(), this.UserID);
     this.getOrders();
-    localStorage.clear();
+  //  localStorage.clear();
   }
 
   getUserID(): string {

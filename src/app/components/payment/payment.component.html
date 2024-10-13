@@ -17,14 +17,21 @@
                     <div class="my-4">
                         <h6 class="text-success">ADD CARD DETAILS</h6>
                         <div class="my-3">
-                            <input  type="text" class="bg-white form-control" placeholder="CARD Number">
+                            <input [(ngModel)]="PaymentData.CardNumber"  type="text" class="bg-white form-control" placeholder="CARD Number">
+                            <label style="font-size: smaller;" class="text-danger" *ngIf="Submitted && PaymentData.CardNumber==''">CardNumber Required</label>
                         </div>
                         <div class="my-3">
-                            <input type="text" class="bg-white form-control" placeholder="CVV">
+                            <input [(ngModel)]="PaymentData.CVV"  type="number" class="bg-white form-control" placeholder="CVV">
+                            <label style="font-size: smaller;" class="text-danger" *ngIf="Submitted && PaymentData.CardNumber==''">CVV Required</label>
                         </div>
                         <div class="my-3">
-                            <input type="text" class="bg-white form-control" placeholder="Expiry Date">
+                            <input [(ngModel)]="PaymentData.Expiry"  type="text" class="bg-white form-control" placeholder="Expiry Date">
+                            <label style="font-size: smaller;" class="text-danger" *ngIf="Submitted && PaymentData.CardNumber==''">Expiry Required</label>
                         </div>
+                    </div>
+                    <div>
+                        <label style="font-size: smaller;" class="text-danger" *ngIf="errormsg">{{this.errormsg}}</label>
+
                     </div>
                     <hr>
                     <div class="my-4 fs-4">

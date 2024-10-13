@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductRegistrationService } from '../details/services/product-registration.service';
 import { Customer } from '../checkout/model/Customer';
 import { Order } from './model/order';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-orderdetails',
@@ -15,14 +16,26 @@ export class OrderdetailsComponent {
   Customer: Customer=new Customer();
   UserID: any;
   OrderData:Order=new Order();
+  state$: Observable<any> | undefined;
+  OrderID: number=0;
 
   constructor(private router : Router,
     private route :ActivatedRoute,
     private ProductRegistrationService:ProductRegistrationService){
-
+      this.state$ = this.route.paramMap.pipe(map(() => window.history.state),);
   }
 
-  ngOnInit(){
+  async ngOnInit(){
+
+    await this.state$?.subscribe((params) => {
+      console.log(params);
+      
+      if (params.orderID !== null && params.orderID !== undefined && params.orderID > 0) { this.OrderID = parseInt(params.orderID); }
+      console.log('OrderID', this.OrderID); // ProductID }); 
+    });
+
+    localStorage.removeItem('ProductRegID');
+
     
     this.UserID= JSON.parse(this.getUserID(), this.UserID);
     this.getContact();
@@ -57,7 +70,7 @@ export class OrderdetailsComponent {
   }
 
   getOrder(){ 
-    this.ProductRegistrationService.GetOrder(this.UserID).subscribe((data)=>{
+    this.ProductRegistrationService.GetOrder(this.OrderID).subscribe((data)=>{
       console.log('pdata',data);
       this.OrderData=data;
       if(data instanceof Array){

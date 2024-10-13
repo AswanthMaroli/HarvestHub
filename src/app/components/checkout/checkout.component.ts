@@ -60,7 +60,7 @@ export class CheckoutComponent {
            // this.ProductRegID = resp.ID;
            // localStorage.setItem('ProductRegID', JSON.stringify(this.ProductRegID));
     
-            this.router.navigate(['payment']);
+           this.router.navigate(['payment']);
           }
         })
       

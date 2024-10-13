@@ -19,7 +19,7 @@ export class AdmminordersComponent {
 
   ngOnInit(){
     this.getOrders();
-    localStorage.clear();
+ 
   }
 
   getOrders(){

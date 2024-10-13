@@ -48,7 +48,7 @@ export class ProfileComponent {
       resp=data;
      if( resp.Saved==true){
       alert("Registered!");
-      this.router.navigate(['login']);
+     // this.router.navigate(['login']);
      }
     })
    
