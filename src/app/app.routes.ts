@@ -17,11 +17,12 @@ import { AllproductsComponent } from './components/admin/allproducts/allproducts
 import { FarmerInfoComponent } from './components/admin/farmer-info/farmer-info.component';
 import { DashboardComponent } from './components/farmer/dashboard/dashboard.component';
 import { AdminComponent } from './components/admin/admin/admin.component';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
 
     {
-        path:'',component:HomeComponent
+        path:'',component:HomeComponent ,canActivate: [AuthGuard]
       },
       {
         path:'login',component:LoginComponent
@@ -56,7 +57,7 @@ export const routes: Routes = [
       },
       //
       {
-        path:'addproduct',component:AddproductsComponent
+        path:'addproduct',component:AddproductsComponent ,canActivate: [AuthGuard]
       },
 
       {
