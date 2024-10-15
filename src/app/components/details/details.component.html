@@ -35,5 +35,60 @@
 </div><br>
 
 
+<div class="container mt-4 p-0">
+    <h4>Customer Reviews</h4>
+    <div class="reviews-section">
+        <div class="review">
+            <div class="review-header d-flex justify-content-between">
+                <span class="review-author"></span>
+                <span class="review-rating">
+                    <!-- <span *ngFor="let star of [].constructor(review.rating); let i = index" class="fa fa-star checked"></span>
+                    <span *ngFor="let star of [].constructor(5 - review.rating); let i = index" class="fa fa-star"></span> -->
+                </span>
+            </div>
+            <!-- <p>{{ review.comment }}</p> -->
+        </div>
+    </div>
+    <div class="mt-3">
+        <h5>Leave a Review</h5>
+        <textarea  placeholder="Write your review..." class="form-control mb-2"></textarea>
+        <label for="review-rating">Rating:</label>
+        <select id="review-rating"  class="form-control mb-2">
+            <option >Star</option>
+        </select>
+        <button type="button" class="btn btn-success" >Submit Review</button>
+        <!-- (click)="SubmitReview()" -->
+    </div>
+</div>
+
+
 
 <app-footer ></app-footer>
+
+
+<!-- binded reviews -->
+<!-- 
+<div class="container mt-4 p-0">
+    <h4>Customer Reviews</h4>
+    <div class="reviews-section">
+        <div *ngFor="let review of this.ProductDetails.Reviews" class="review">
+            <div class="review-header d-flex justify-content-between">
+                <span class="review-author">{{ review.author }}</span>
+                <span class="review-rating">
+                    <span *ngFor="let star of [].constructor(review.rating); let i = index" class="fa fa-star checked"></span>
+                    <span *ngFor="let star of [].constructor(5 - review.rating); let i = index" class="fa fa-star"></span>
+                </span>
+            </div>
+            <p>{{ review.comment }}</p>
+        </div>
+    </div>
+    <div class="mt-3">
+        <h5>Leave a Review</h5>
+        <textarea [(ngModel)]="newReview.comment" placeholder="Write your review..." class="form-control mb-2"></textarea>
+        <label for="review-rating">Rating:</label>
+        <select id="review-rating" [(ngModel)]="newReview.rating" class="form-control mb-2">
+            <option *ngFor="let star of [].constructor(5); let i = index" [value]="i + 1">{{ i + 1 }} Star</option>
+        </select>
+        <button type="button" class="btn btn-primary" (click)="SubmitReview()">Submit Review</button>
+    </div>
+</div> -->

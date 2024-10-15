@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProductDetail } from '../../../Models/ProductDetail';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { UserData } from '../../../Models/UserData';
 import { SaveResponse } from '../../../Models/SaveResponse';
 
@@ -60,6 +60,20 @@ export class ProductService {
         'Content-Type': 'application/json'
       })
     });
+  }
+
+
+  DeleteProduct(
+    ProductID: number
+  ): Observable<SaveResponse> {
+    let params = new HttpParams();
+    params = params.append('ProductID', ProductID);
+    return this.http.delete<SaveResponse>(
+      this.apiUrl + '/deleteproduct',
+      {
+        params: params,
+      }
+    ).pipe(map((response) => response));
   }
 
 }
