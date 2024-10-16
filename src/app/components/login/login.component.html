@@ -89,33 +89,54 @@
               <form [formGroup]="loginForm" (ngSubmit)="login()">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                  <input formControlName="email" name="email" type="text" id="form3Example3" placeholder="Email" class="form-control" required />
-                  <!-- <label class="form-label" for="form3Example3">Email address</label> -->
+                  <input
+                    formControlName="email"
+                    type="text"
+                    id="form3Example3"
+                    placeholder="Email"
+                    class="form-control"
+                    required
+                  />
+                  <div *ngIf="this.IsSubmitted==true &&(!this.loginForm.value.email || this.loginForm.value.email =='')" class="text-danger">
+                    <div style="font-size: 0.8rem; margin-left: 10px;">Email is required.</div>
+                  </div>
                 </div>
               
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                  <input formControlName="password" name="password" type="password" id="form3Example4" placeholder="Password" class="form-control" required />
-                  <!-- <label class="form-label" for="form3Example4">Password</label> -->
+                  <input
+                    formControlName="password"
+                    type="password"
+                    id="form3Example4"
+                    placeholder="Password"
+                    class="form-control"
+                    required
+                  />
+                  <div *ngIf="this.IsSubmitted==true &&(!this.loginForm.value.password || this.loginForm.value.password =='')" class="text-danger">
+                    <div style="font-size: 0.8rem; margin-left: 10px;">Password is required.</div>
+                  </div>
                 </div>
-
+              
+                <!-- Role selection -->
                 <div class="form-outline mb-4">
-                  <select formControlName="role" name="role" id="form3Example4" class="form-control" required>
-                     
-                    <option selected value="0" >User</option>
-                <option value="1">Farmer</option>
+                  <select formControlName="role" id="form3Example4" class="form-control" required>
+                    <option value="0">User</option>
+                    <option value="1">Farmer</option>
                   </select>
-                  <!-- <label class="form-label" for="form3Example4">Role</label> -->
+                  <div  *ngIf="this.IsSubmitted==true &&(!this.loginForm.value.role && this.loginForm.value.role==0)" class="text-danger">
+                    <div style="font-size: 0.8rem; margin-left: 10px;" >Role is required.</div>
+                  </div>
                 </div>
               
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-success btn-block mb-4">Log in</button><br>
+                <button type="submit" class="btn btn-success btn-block mb-4" >Log in</button><br>
               
                 <!-- Register link -->
                 <label class="form-check-label" for="form2Example33">
                   Create an Account? <a class="signup" href="/register">Register</a>
                 </label>
               </form>
+              
               
             </div>
           </div>

@@ -5,12 +5,13 @@ import { Users } from '../../Models/users';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { SaveResponse } from '../../Models/SaveResponse';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule,CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -22,18 +23,20 @@ export class LoginComponent {
   users: Users[] = [];
   loginForm: FormGroup;
   isValid: boolean = true;
+  IsSubmitted: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router,
     private LoginService: LoginService
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required]],
       password: ['', Validators.required],
       role: ['0', Validators.required],
     });
   }
 
   async login() {
+    this.IsSubmitted=true;
 debugger;
     if (this.loginForm.valid) {
       this.loginData.Email = this.loginForm.value.email;
@@ -43,6 +46,7 @@ debugger;
       
       if (this.IsValid() == false) {
         return;
+
       }
 
       if( this.loginData.Email =='ADMIN@GMAIL.COM' &&
@@ -68,6 +72,7 @@ debugger;
 
         } else {
           alert("Login Failed!");
+          this.IsSubmitted=false;
         }
       })
     }

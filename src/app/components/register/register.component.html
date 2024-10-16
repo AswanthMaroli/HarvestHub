@@ -72,11 +72,17 @@
 
                                 <div class="form-outline mb-4">
                                     <input [(ngModel)]="UserData.UserName" name="UserName" type="text" id="form3Example3" class="form-control" placeholder="Full Name"/>
+                                    <div  *ngIf="this.IsSubmitted==true &&(!UserData.UserName && UserData.UserName=='')" class="text-danger">
+                                        <div style="font-size: 0.8rem; margin-left: 10px;" > UserName is required.</div>
+                                      </div>
                                 </div>
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
                                     <input [(ngModel)]="UserData.Email" name="Email" type="email" id="form3Example3" class="form-control" placeholder="Email address"/>
+                                    <div  *ngIf="this.IsSubmitted==true &&(!UserData.Email && UserData.Email=='')" class="text-danger">
+                                        <div style="font-size: 0.8rem; margin-left: 10px;" > Email is required.</div>
+                                      </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -91,11 +97,22 @@
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
                                     <input [(ngModel)]="UserData.Password" name="Password" type="password" id="form3Example4" class="form-control" placeholder="Password"/>
+                                    <div  *ngIf="this.IsSubmitted==true &&(!UserData.Password && UserData.Password=='')" class="text-danger">
+                                        <div style="font-size: 0.8rem; margin-left: 10px;" > Password is required.</div>
+                                      </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input [(ngModel)]="UserData.ConfirmPassword" name="ConfirmPassword" type="password" id="form3Example4" class="form-control" placeholder="Confirm Password" />
+                                    <input [(ngModel)]="UserData.ConfirmPassword" (ngModelChange)="ConfirmPassword()" name="ConfirmPassword" type="password" id="form3Example4" class="form-control" placeholder="Confirm Password" />
+                                    <div  *ngIf="this.IsSubmitted==true &&(!UserData.ConfirmPassword && UserData.ConfirmPassword=='')" class="text-danger">
+                                        <div style="font-size: 0.8rem; margin-left: 10px;" >Confirm Password is required.</div>
+                                      </div>
+                                      <div  *ngIf="(this.error && this.error!=='')" class="text-danger">
+                                        <div style="font-size: 0.8rem; margin-left: 10px;" >{{this.error}}.</div>
+                                      </div>
                                 </div>
+
+                                
                                 <!-- Submit button -->
                                 <button type="submit" (click)="Submit()" class="btn btn-success btn-block mb-4">
                                     Sign Up
