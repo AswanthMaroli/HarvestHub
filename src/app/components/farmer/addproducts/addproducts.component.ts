@@ -66,6 +66,7 @@ async saveProduct(){
           resp = data;
           debugger;
           if (resp.Saved == true) {
+            this.GetProducts();
             alert("Product saved!");
             console.log('added');
            // this.ProductRegID = resp.ID;
