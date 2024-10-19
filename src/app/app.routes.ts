@@ -18,6 +18,7 @@ import { FarmerInfoComponent } from './components/admin/farmer-info/farmer-info.
 import { DashboardComponent } from './components/farmer/dashboard/dashboard.component';
 import { AdminComponent } from './components/admin/admin/admin.component';
 import { AuthGuard } from './auth.guard';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 export const routes: Routes = [
 
@@ -83,7 +84,9 @@ export const routes: Routes = [
         path:'admin',component:AdminComponent
       },
 
-      
+      {
+        path:'userdetails',component:UserDetailsComponent
+      },
       
 
 ];

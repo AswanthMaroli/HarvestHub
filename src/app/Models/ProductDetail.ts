@@ -8,6 +8,7 @@ export class ProductDetail{
      ImageURL    : string='' ;
     // ModifiedDate:  Date = new Date() ;
      ModifiedUser: number =0;
+     UserName:string='' ;
      DelStatus   : boolean=false;
 
 

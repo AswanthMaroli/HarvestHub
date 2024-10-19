@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { SaveResponse } from '../../../Models/SaveResponse';
 import { Registration } from '../Models/Registration';
 import { Cart } from '../Models/cart';
 import { Customer } from '../../checkout/model/Customer';
 import { PaymentData } from '../../payment/Models/payment';
 import { Order } from '../../orderdetails/model/order';
+import { Review } from '../Models/Review';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,15 @@ export class ProductRegistrationService {
 
   SaveOrder( data: PaymentData): Observable<SaveResponse> {
     const url = `${this.apiUrl}/saveOrder`;
+    return this.http.post<SaveResponse>(url, data, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) 
+    });
+  }
+
+  SaveReview( data: Review): Observable<SaveResponse> {
+    const url = `${this.apiUrl}/savereviews`;
     return this.http.post<SaveResponse>(url, data, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -116,6 +126,29 @@ export class ProductRegistrationService {
       }) ,
       params: new HttpParams().set('UserID', UserID.toString())
     });
+  }
+
+  GetReviews( ID:number): Observable<Review[]> {
+    const url = `${this.apiUrl}/getreviews`;
+     return  this.http.get<Review[]>(url , {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }) ,
+      params: new HttpParams().set('ProductID', ID.toString())
+    });
+  }
+
+  DeleteReview(
+    ReviewID: number
+  ): Observable<SaveResponse> {
+    let params = new HttpParams();
+    params = params.append('ReviewID', ReviewID);
+    return this.http.delete<SaveResponse>(
+      this.apiUrl + '/deletereview',
+      {
+        params: params,
+      }
+    ).pipe(map((response) => response));
   }
  
 }

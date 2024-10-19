@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ProductDetail } from '../../Models/ProductDetail';
 import { map, Observable } from 'rxjs';
 import { Registration } from './Models/Registration';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { SaveResponse } from '../../Models/SaveResponse';
 import { ProductService } from '../home/services/product.service';
 import { ProductRegistrationService } from './services/product-registration.service';
@@ -10,11 +10,12 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { Review } from './Models/Review';
+declare var $: any; // Declare jQuery
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, CommonModule, FormsModule],
+  imports: [HeaderComponent, FooterComponent, CommonModule, FormsModule, RouterModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
@@ -24,9 +25,12 @@ export class DetailsComponent {
   ProductID: number = 0;
   state$: Observable<any> | undefined;
   Registration: Registration = new Registration();
+  Review : Review= new Review();
   ProductRegID: any;
   UserID: any;
   ProductRegDetails: Registration[] = [];
+  ReviewList:Review[]=[];
+
 
   constructor(private ProductService: ProductService,
     private router: Router,
@@ -63,6 +67,7 @@ export class DetailsComponent {
     
     if (this.ProductID && this.ProductID > 0) {
       await this.GetProductDetails();
+      await this.GetReviews();
     }
 
 
@@ -71,6 +76,14 @@ export class DetailsComponent {
       this.Registration.Quantity=0;
     }
   }
+
+  openModal() {
+    $('#exampleModal').modal('show');
+}
+
+closeModal() {
+    $('#exampleModal').modal('hide');
+}
 
   getProductRegID(): string {
     let ProductRegID = localStorage.getItem('ProductRegID');
@@ -105,6 +118,18 @@ export class DetailsComponent {
       }
       if (!this.ProductDetails) {
         this.ProductDetails = new ProductDetail();
+      }
+    })
+
+  }
+
+  async GetReviews() {
+    await this.ProductRegistrationService.GetReviews(this.ProductID).subscribe((data) => {
+      console.log('pdata', data);
+
+      this.ReviewList = data;
+      if (!this.ReviewList) {
+        this.ReviewList = [];
       }
     })
 
@@ -161,6 +186,46 @@ export class DetailsComponent {
       }
     })
 
+  }
+
+
+  async SubmitReview() {
+    this.Review.ProductID = this.ProductID;
+    this.Review.ModifiedUser = this.UserID;
+    console.log('review', this.Review);
+
+    this.ProductRegistrationService.SaveReview(this.Review)
+      .subscribe((data) => {
+        console.log(data);
+        let resp = new SaveResponse();
+        resp = data;
+        debugger;
+        if (resp.Saved == true) {
+          alert("Review Submitted!");
+          this.GetReviews();
+        }
+      })
+
+
+  }
+
+  DeleteReview(ReviewID: number) {
+
+    // if (this.IsSaving) {
+    //   return;
+    // }
+    // this.IsDeleteing = true;
+    this.ProductRegistrationService
+      .DeleteReview(ReviewID)
+      .subscribe(async (data: any) => {
+        let response: SaveResponse = new SaveResponse();
+        response = data;
+        console.log('response', response);
+        if (response.Saved == true) {
+          alert("review Deleted!");
+           await this.GetReviews();
+        }
+      });
   }
 
 }
