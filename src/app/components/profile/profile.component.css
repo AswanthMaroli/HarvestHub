@@ -85,12 +85,12 @@ body {
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 input[type="text"],

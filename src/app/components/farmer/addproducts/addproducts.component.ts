@@ -89,4 +89,23 @@ async saveProduct(){
         reader.readAsDataURL(file); // Convert image to base64 string
       }
     }
+
+
+    EditProduct(product:ProductDetail){
+      this.Product=product;
+    }
+
+    DeleteProduct(productID:number){
+      this.ProductService
+      .DeleteProduct(productID)
+      .subscribe(async (data: any) => {
+        let response: SaveResponse = new SaveResponse();
+        response = data;
+        console.log('response', response);
+      //  if (response.Saved == true) {
+      //    alert("Product Deleted!");
+           await this.GetProducts();
+       // }
+      });
+    }
 }

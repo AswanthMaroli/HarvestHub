@@ -10,7 +10,9 @@
         <div class="col-sm-6 details">
 
             <h2 class="mt-2" style="font-family: 'Roboto', sans-serif; ">{{this.ProductDetails.ProductName}}</h2>
-            <a style="text-decoration: dashed;" [routerLink]="['/userdetails']"   [state]="{ UserID: this.ProductDetails.ModifiedUser }"><b>Seller :</b>{{this.ProductDetails.UserName}}</a>
+            <a style="text-decoration: dashed;" [routerLink]="['/userdetails']"
+                [state]="{ UserID: this.ProductDetails.ModifiedUser }"><b>Seller
+                    :</b>{{this.ProductDetails.UserName}}</a>
             <p><b>Description :</b>{{this.ProductDetails.Description}} </p>
             <h3><b>Price :</b>${{this.ProductDetails.Price}}</h3>
             <div class="col-md-4 quantity">
