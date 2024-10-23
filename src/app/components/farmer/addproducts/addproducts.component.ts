@@ -11,101 +11,122 @@ import { SaveResponse } from '../../../Models/SaveResponse';
 @Component({
   selector: 'app-addproducts',
   standalone: true,
-  imports: [HeaderComponent,FooterComponent,CommonModule,RouterModule,FormsModule],
+  imports: [HeaderComponent, FooterComponent, CommonModule, RouterModule, FormsModule],
   templateUrl: './addproducts.component.html',
   styleUrl: './addproducts.component.css'
 })
 export class AddproductsComponent {
 
-  ProductDetails : ProductDetail[] = [];
+  ProductDetails: ProductDetail[] = [];
   UserID: any;
-  Product: ProductDetail=new ProductDetail();
+  Product: ProductDetail = new ProductDetail();
+  isValid: boolean =false;
+  isSubmitted: boolean=false;
 
-  constructor(private ProductService : ProductService,
-              private router : Router,
-    private route :ActivatedRoute,
-              ){}
+  constructor(private ProductService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
-  async ngOnInit(){  
-   this.UserID= JSON.parse(this.getUserID(), this.UserID);
+  async ngOnInit() {
+    this.UserID = JSON.parse(this.getUserID(), this.UserID);
     await this.GetProducts();
   }
- 
+
   getUserID(): string {
     let UserID = localStorage.getItem('UserID');
-    if(UserID){
+    if (UserID) {
       return UserID;
-    }else{
+    } else {
       return '';
     }
-     
   }
 
-  async GetProducts(){  
-    await this.ProductService.GetProductsByUserID(this.UserID).subscribe((data)=>{
-      console.log('pdata',data);
-      this.ProductDetails=data;
-     if( !this.ProductDetails ){
-      this.ProductDetails=[];
-     }
-    })
-   
-}
-
-
-async saveProduct(){
-
-    debugger;
-    this.Product.ModifiedUser=this.UserID;
-     
-   
-      this.ProductService.SaveProduct(this.Product)
-        .subscribe((data) => {
-          console.log(data);
-          let resp = new SaveResponse();
-          resp = data;
-          debugger;
-          if (resp.Saved == true) {
-            this.GetProducts();
-            alert("Product saved!");
-            console.log('added');
-           // this.ProductRegID = resp.ID;
-           // localStorage.setItem('ProductRegID', JSON.stringify(this.ProductRegID));
-   
-            //this.router.navigate(['payment']);
-          }
-        })
-     
-   
-    }
-
-    onFileSelected(event: any) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.Product.ImageURL = e.target.result;  // This will store the base64 URL of the image
-        };
-        reader.readAsDataURL(file); // Convert image to base64 string
+  async GetProducts() {
+    await this.ProductService.GetProductsByUserID(this.UserID).subscribe((data) => {
+      console.log('pdata', data);
+      this.ProductDetails = data;
+      if (!this.ProductDetails) {
+        this.ProductDetails = [];
       }
+    })
+  }
+
+
+  async saveProduct() {
+
+    this.isSubmitted =true;
+
+    if(this.isValid==false){
+      return;
     }
+    this.Product.ModifiedUser = this.UserID;
+    this.ProductService.SaveProduct(this.Product)
+      .subscribe((data) => {
+        console.log(data);
+        let resp = new SaveResponse();
+        resp = data;
+        if (resp.Saved == true) {
+          this.GetProducts();
+          console.log('added');
+        }
+        this.isSubmitted =false;
+      })
+  }
 
+  IsValid() {
+    this.isValid = true;
 
-    EditProduct(product:ProductDetail){
-      this.Product=product;
+    this.Product.ProductName = this.Product.ProductName  ?? '';
+
+    this.Product.Description =  this.Product.Description ?? '';
+
+    this.Product.Price =  this.Product.Price ?? 0 ;
+
+    this.Product.ImageURL = this.Product.ImageURL  ?? '';
+
+    this.Product.TotalQuantity =  this.Product.TotalQuantity ?? 0;
+
+    this.Product.ProductType =  this.Product.ProductType ?? 0 ;
+
+    if (this.Product.ProductType == 0 || this.Product.TotalQuantity == 0 ||
+      this.Product.ImageURL =='' || this.Product.Price == 0 ||
+      this.Product.Description =='' || this.Product.ProductName == ''
+    ) {
+      return this.isValid = false;
     }
+    else {
+      return true;
+    }
+  }
 
-    DeleteProduct(productID:number){
-      this.ProductService
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.Product.ImageURL = e.target.result;  // This will store the base64 URL of the image
+      };
+      reader.readAsDataURL(file); // Convert image to base64 string
+    }
+  }
+
+
+  EditProduct(product: ProductDetail) {
+    this.Product = product;
+  }
+
+  DeleteProduct(productID: number) {
+    this.ProductService
       .DeleteProduct(productID)
       .subscribe(async (data: any) => {
         let response: SaveResponse = new SaveResponse();
         response = data;
         console.log('response', response);
-      //  if (response.Saved == true) {
-      //    alert("Product Deleted!");
-           await this.GetProducts();
-       // }
+        //  if (response.Saved == true) {
+        //    alert("Product Deleted!");
+        await this.GetProducts();
+        // }
       });
-    }
+  }
 }

@@ -9,6 +9,7 @@ export class ProductDetail{
     // ModifiedDate:  Date = new Date() ;
      ModifiedUser: number =0;
      UserName:string='' ;
+     AvailableQuantity: number =0;
      DelStatus   : boolean=false;
 
 

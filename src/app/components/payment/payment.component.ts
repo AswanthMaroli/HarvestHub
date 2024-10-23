@@ -101,7 +101,7 @@ export class PaymentComponent {
         let resp = new SaveResponse();
         resp = data;
         if (resp.Saved == true) {
-          alert("Registered!");
+          alert("Payment Success!");
           this.Submitted=false;
           this.errormsg ='';
           this.router.navigate(['order'], { state: { orderID: resp.ID } });

@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { SaveResponse } from '../Models/SaveResponse';
 import { loginData } from '../Models/loginData';
 
@@ -20,5 +20,18 @@ export class LoginService {
         'Content-Type': 'application/json'
       }) 
     });
+  }
+
+  DeleteUser(
+    UserID: number
+  ): Observable<SaveResponse> {
+    let params = new HttpParams();
+    params = params.append('UserID', UserID);
+    return this.http.delete<SaveResponse>(
+      this.apiUrl + '/deleteuser',
+      {
+        params: params,
+      }
+    ).pipe(map((response) => response));
   }
 }

@@ -1,7 +1,7 @@
 <div class="container">
     <section class="product-list">
         <h2><b>Order List</b></h2>
-        <input type="text" id="search-bar" placeholder="Search products...">
+        <!-- <input type="text" id="search-bar" placeholder="Search products..."> -->
         <table>
             <thead>
                 <tr>
@@ -14,8 +14,8 @@
             </thead>
             <tbody *ngFor=" let order of this.OrderData">
                 <td>{{order.ProductName}}</td>
-                <td>{{order.Quantity}}</td>
-                <td>${{order.NetTotal}}</td>
+                <td>{{order.Quantity}}Kg</td>
+                <td>₹{{order.NetTotal}}</td>
                 <td>{{order.OrderDate | date:'fullDate'}}</td>
                 <!-- <td>Actions</td> -->
             </tbody>

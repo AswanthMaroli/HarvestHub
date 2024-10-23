@@ -14,7 +14,7 @@
                             <p><strong>Product:</strong> {{data.ProductName}}</p>
                             <p><strong>Quantity:</strong> {{data.Quantity}}</p>
                             <p><strong>Total:</strong>{{data.NetTotal}}</p>
-                            <p><strong>Date:</strong>{{data.OrderDate}}</p>
+                            <p><strong>Date:</strong>{{data.OrderDate | date:'fullDate'}}</p>
                         </div>
                     </div>
                 </div>

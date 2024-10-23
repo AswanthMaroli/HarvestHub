@@ -15,10 +15,16 @@
                         <div class="row mb-3">
                             <div class="col-12">
                                 <input [(ngModel)]="this.Product.ProductName" type="text" class="form-control" placeholder="Product Name">
+                                <div *ngIf="this.isSubmitted==true &&(this.Product.ProductName =='')" class="text-danger">
+                                    <div style="font-size: 0.8rem; margin-left: 10px;">Product Name is required.</div>
+                                  </div>
                             </div>
                             <div class="text-secondary mt-4 mb-2">Description</div>
                             <div class="col-12">
                                 <input [(ngModel)]="this.Product.Description"  type="text" class="form-control" placeholder="Description">
+                                <div *ngIf="this.isSubmitted==true &&(this.Product.Description =='')" class="text-danger">
+                                    <div style="font-size: 0.8rem; margin-left: 10px;">Description is required.</div>
+                                  </div>
                             </div>
                         </div>
 
@@ -26,21 +32,30 @@
                         <div class="mb-3">
                             <div class="text-secondary mt-4 mb-2">Price</div>
                             <input type="text" [(ngModel)]="this.Product.Price" placeholder="Price" class="form-control">
+                            <div *ngIf="this.isSubmitted==true &&(this.Product.Price ==0)" class="text-danger">
+                                <div style="font-size: 0.8rem; margin-left: 10px;">Price is required.</div>
+                              </div>
                         </div>
                         <div class="row mb-3">
                             <div class="text-secondary mt-4 mb-2">Total Quantity</div>
                             <div class="col">
                                 <input type="number" [(ngModel)]="this.Product.TotalQuantity" class="form-control" placeholder="TotalQuantity">
+                                <div *ngIf="this.isSubmitted==true &&(this.Product.TotalQuantity ==0)" class="text-danger">
+                                    <div style="font-size: 0.8rem; margin-left: 10px;">Total Quantity is required.</div>
+                                  </div>
                             </div>
                             <div class="text-secondary mt-4 mb-2">Upload Image</div>
                             <div class="col">
                                     <input type="file" (change)="onFileSelected($event)" class="form-control" accept="image/*"
                                       placeholder="Upload Image">
+                                      <div *ngIf="this.isSubmitted==true &&(this.Product.ImageURL =='')" class="text-danger">
+                                        <div style="font-size: 0.8rem; margin-left: 10px;">Image is required.</div>
+                                      </div>
                                     
                             </div>
                             <div class="col">
                                 <div>
-                                    <img style="height: 100px; width: 100px;" src="{{this.Product.ImageURL}}" alt="">
+                                    <img *ngIf="this.Product?.ImageURL" style="height: 100px; width: 100px;" src="{{this.Product.ImageURL}}" alt="">
                                   </div>
                             </div>
                         </div>
@@ -137,18 +152,18 @@
         <table>
             <thead>
                 <tr>
+                    <th></th>
                     <th>Product Name</th>
-                    <th>Category</th>
                     <th>Price</th>
                     <th>Stock</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody *ngFor=" let product of this.ProductDetails">
+                <td><img src="{{product.ImageURL}}" alt="" style="height: 100px ; width: 100px;"></td>
                 <td>{{product.ProductName}}</td>
-                <td>{{product.ProductType}}</td>
-                <td>{{product.Price}}</td>
-                <td>{{product.TotalQuantity}}</td>
+                <td>₹{{product.Price}}</td>
+                <td>{{product.TotalQuantity}}Kg</td>
                 <td>  <button (click)="EditProduct(product)" style="height: 35px;" class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                     <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
                   </svg></button>

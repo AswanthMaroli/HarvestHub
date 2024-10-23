@@ -14,9 +14,9 @@
                 [state]="{ UserID: this.ProductDetails.ModifiedUser }"><b>Seller
                     :</b>{{this.ProductDetails.UserName}}</a>
             <p><b>Description :</b>{{this.ProductDetails.Description}} </p>
-            <h3><b>Price :</b>${{this.ProductDetails.Price}}</h3>
+            <h3><b>Price :</b> ₹{{this.ProductDetails.Price}}</h3>
             <div class="col-md-4 quantity">
-                <label for="quantity">Quantity: {{this.ProductDetails.TotalQuantity}}</label>
+                <label for="quantity">Quantity : {{this.ProductDetails.TotalQuantity}} /{{this.ProductDetails.AvailableQuantity}} Kg</label>
                 <input id="quantity" type="number" class="form-control quantity-input"
                     [(ngModel)]="this.Registration.Quantity">
             </div><br>
