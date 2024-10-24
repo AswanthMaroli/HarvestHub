@@ -25,15 +25,18 @@
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input [(ngModel)]="UserData.UserName" type="text" id="name" name="name"  required>
+                        <label style="font-size: smaller;" class="text-danger" *ngIf="Submitted && UserData.UserName==''">UserName Required</label>
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input [(ngModel)]="UserData.Email" type="email" id="email" name="email"  required>
+                        <label style="font-size: smaller;" class="text-danger" *ngIf="Submitted && UserData.Email==''">Email Required</label>
                     </div>
                    
                     <div class="form-group">
                         <label for="profile-image">Profile Image:</label>
                         <input  (change)="onFileSelected($event)"  type="file" id="profile-image" name="profile-image">
+                        <label style="font-size: smaller;" class="text-danger" *ngIf="Submitted && UserData.ImageURL==''">Image Required</label>
                     </div>
                     <button type="submit" (click)="Submit()" class="btn">Update Profile</button>
                 </div>

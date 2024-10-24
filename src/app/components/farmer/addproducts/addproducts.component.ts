@@ -54,13 +54,12 @@ export class AddproductsComponent {
 
 
   async saveProduct() {
-
+    this.Product.ModifiedUser = this.UserID;
     this.isSubmitted =true;
-
-    if(this.isValid==false){
+    if(this.IsValid()==false){
       return;
     }
-    this.Product.ModifiedUser = this.UserID;
+   
     this.ProductService.SaveProduct(this.Product)
       .subscribe((data) => {
         console.log(data);
@@ -89,14 +88,14 @@ export class AddproductsComponent {
 
     this.Product.ProductType =  this.Product.ProductType ?? 0 ;
 
-    if (this.Product.ProductType == 0 || this.Product.TotalQuantity == 0 ||
+    if ( this.Product.TotalQuantity == 0 ||
       this.Product.ImageURL =='' || this.Product.Price == 0 ||
       this.Product.Description =='' || this.Product.ProductName == ''
     ) {
-      return this.isValid = false;
+      return  false;
     }
     else {
-      return true;
+      return  true;
     }
   }
 

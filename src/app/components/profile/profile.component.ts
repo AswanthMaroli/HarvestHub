@@ -17,6 +17,7 @@ export class ProfileComponent {
 
   UserData : Authenticate = new Authenticate ();
   UserID: any;
+  Submitted: boolean = false;
 
   constructor(private Regservice : RegisterService,
     private router : Router
@@ -41,7 +42,10 @@ export class ProfileComponent {
   }
 
   async Submit(){
-    debugger;
+    this.Submitted=true;
+    if(this.IsValid()==false){
+      return;
+    }
     await this.Regservice.SaveUser(this.UserData).subscribe((data)=>{
       console.log(data);
       let resp = new SaveResponse();
@@ -52,6 +56,25 @@ export class ProfileComponent {
      }
     })
    
+  }
+
+  IsValid() {
+
+
+    this.UserData.UserName =  this.UserData.UserName ?? '';
+
+    this.UserData.Email =  this.UserData.Email ?? 0 ;
+
+    this.UserData.ImageURL = this.UserData.ImageURL  ?? '';
+
+    if ( this.UserData.UserName == '' ||
+      this.UserData.ImageURL =='' || this.UserData.Email == '' 
+    ) {
+      return  false;
+    }
+    else {
+      return  true;
+    }
   }
  
   GetUser(){

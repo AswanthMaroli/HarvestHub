@@ -79,7 +79,7 @@ export class PaymentComponent {
   async Payment() {
     debugger;
     this.Submitted=true;
-    if (this.isValid == false) {
+    if (this.IsValid() == false) {
       return;
     }
 
@@ -134,7 +134,7 @@ export class PaymentComponent {
       ? '' : this.PaymentData.Expiry;
 
     if (this.PaymentData.Expiry == '' || this.PaymentData.CardNumber == '' || this.PaymentData.CVV == 0) {
-      return this.isValid = false;
+      return  false;
     }
     else {
       return true;

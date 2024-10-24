@@ -228,4 +228,8 @@ closeModal() {
       });
   }
 
+  ChangeQuantity(event:Event){
+
+  }
+
 }

@@ -41,23 +41,38 @@
                         <div class="text-secondary mt-4 mb-2">Billing Address</div>
                         <div class="row mb-3">
                             <div class="col-lg-8 col-md-6 col-xs-12">
-                                <input [(ngModel)]="this.CustomerData.StreetAddress" type="text" class="form-control" placeholder="Street Address">
+                                <input [(ngModel)]="this.CustomerData.StreetAddress" type="text" class="form-control" placeholder="Billing Address">
+                                <div *ngIf="this.isSubmitted==true &&(this.CustomerData.StreetAddress =='')" class="text-danger">
+                                    <div style="font-size: 0.8rem; margin-left: 10px;">Billing Address is required.</div>
+                                  </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-xs-12">
                                 <input [(ngModel)]="this.CustomerData.ZipCode"  type="text" class="form-control" placeholder="Zipcode">
+                                <div *ngIf="this.isSubmitted==true &&(this.CustomerData.ZipCode =='')" class="text-danger">
+                                    <div style="font-size: 0.8rem; margin-left: 10px;">ZipCode is required.</div>
+                                  </div>
                             </div>
                         </div>
 
                         <div class="text-secondary mt-4 mb-2">Contact Info </div>
                         <div class="mb-3">
                             <input type="text" [(ngModel)]="this.CustomerData.ContactName" placeholder="ContactName" class="form-control">
+                            <div *ngIf="this.isSubmitted==true &&(this.CustomerData.ContactName =='')" class="text-danger">
+                                <div style="font-size: 0.8rem; margin-left: 10px;">ContactName is required.</div>
+                              </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <input type="email" [(ngModel)]="this.CustomerData.Email" class="form-control" placeholder="Email">
+                                <div *ngIf="this.isSubmitted==true &&(this.CustomerData.Email =='')" class="text-danger">
+                                    <div style="font-size: 0.8rem; margin-left: 10px;">Email is required.</div>
+                                  </div>
                             </div>
                             <div class="col">
                                 <input type="text" [(ngModel)]="this.CustomerData.Phone" class="form-control" placeholder="Phone">
+                                <div *ngIf="this.isSubmitted==true &&(this.CustomerData.Phone =='')" class="text-danger">
+                                    <div style="font-size: 0.8rem; margin-left: 10px;">Phone is required.</div>
+                                  </div>
                             </div>
                         </div>
 

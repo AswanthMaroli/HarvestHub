@@ -20,6 +20,7 @@ export class CheckoutComponent {
   CustomerData : Customer= new Customer();
   UserID: any;
   Customer: Customer= new Customer();
+  isSubmitted: boolean=false;
 
   constructor(private router : Router,
     private route :ActivatedRoute,
@@ -45,6 +46,10 @@ export class CheckoutComponent {
   async saveCustomer(){
 
     debugger;
+    this.isSubmitted=true;
+    if(this.IsValid()==false){
+      return;
+    }
     this.CustomerData.ModifiedUser=this.UserID;
       console.log('test reg',this.CustomerData);
     
@@ -55,7 +60,7 @@ export class CheckoutComponent {
           resp = data;
           debugger;
           if (resp.Saved == true) {
-            alert("Added To cart!");
+           // alert("Added To cart!");
             console.log('added');
            // this.ProductRegID = resp.ID;
            // localStorage.setItem('ProductRegID', JSON.stringify(this.ProductRegID));
@@ -65,6 +70,30 @@ export class CheckoutComponent {
         })
       
     
+    }
+
+    IsValid() {
+  
+      this.CustomerData.ContactName = this.CustomerData.ContactName  ?? '';
+  
+      this.CustomerData.Email =  this.CustomerData.Email ?? '';
+  
+      this.CustomerData.Phone =  this.CustomerData.Phone ?? '' ;
+  
+      this.CustomerData.StreetAddress = this.CustomerData.StreetAddress  ?? '';
+  
+      this.CustomerData.ZipCode =  this.CustomerData.ZipCode ?? '';
+  
+  
+      if ( this.CustomerData.ContactName == '' ||
+        this.CustomerData.Email =='' || this.CustomerData.StreetAddress == '' ||
+        this.CustomerData.Phone =='' || this.CustomerData.ZipCode == ''
+      ) {
+        return  false;
+      }
+      else {
+        return  true;
+      }
     }
 
     async getContact(){
