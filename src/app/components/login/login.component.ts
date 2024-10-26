@@ -24,6 +24,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   isValid: boolean = true;
   IsSubmitted: boolean = false;
+  ErrorMsg: string = '';
 
   constructor(private formBuilder: FormBuilder, private router: Router,
     private LoginService: LoginService
@@ -61,7 +62,7 @@ debugger;
         if (resp.Saved == true) {
           console.log('UserID', resp.ID);
           localStorage.setItem('UserID', JSON.stringify(resp.ID));
-          alert("Login Success!");
+          //alert("Login Success!");
           if (this.loginData.Role == 0) {
            
             this.router.navigate(['']);
@@ -71,7 +72,7 @@ debugger;
           }
 
         } else {
-          alert("Login Failed!");
+          this.ErrorMsg="Login Failed!";
           this.IsSubmitted=false;
         }
       })

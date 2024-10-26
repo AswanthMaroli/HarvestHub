@@ -18,4 +18,14 @@ export class Order {
     ProductRegID: number = 0;
 
     Quantity: number = 0;
+
+    Buyer : string = '';
+
+    Email : string = '';
+
+    Phone : string = '';
+
+    StreetAddress : string = '';
+
+    ZipCode : string = '';
 }

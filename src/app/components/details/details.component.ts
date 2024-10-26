@@ -154,7 +154,7 @@ closeModal() {
         resp = data;
         debugger;
         if (resp.Saved == true) {
-          alert("Added To cart!");
+         // alert("Added To cart!");
           console.log('added');
           this.ProductRegID = resp.ID;
           localStorage.setItem('ProductRegID', JSON.stringify(this.ProductRegID));
@@ -201,7 +201,7 @@ closeModal() {
         resp = data;
         debugger;
         if (resp.Saved == true) {
-          alert("Review Submitted!");
+        //  alert("Review Submitted!");
           this.GetReviews();
         }
       })
@@ -222,13 +222,18 @@ closeModal() {
         response = data;
         console.log('response', response);
         if (response.Saved == true) {
-          alert("review Deleted!");
+         // alert("review Deleted!");
            await this.GetReviews();
         }
       });
   }
 
-  ChangeQuantity(event:Event){
+  ChangeQuantity(event:any){
+    if(event && event >0){
+      this.Registration.Quantity=event;
+    }else{
+      this.Registration.Quantity=0;
+    }
 
   }
 

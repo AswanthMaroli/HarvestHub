@@ -51,7 +51,7 @@ export class ProfileComponent {
       let resp = new SaveResponse();
       resp=data;
      if( resp.Saved==true){
-      alert("saved!");
+      alert("Saved!");
      // this.router.navigate(['login']);
      }
     })
